@@ -1,4 +1,4 @@
-package pl.miklaszlukasz.model;
+package pl.miklaszlukasz.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,8 +14,15 @@ public class Account implements Serializable {
     @Id
     private String login;
     private String password;
-    private boolean active;
 
+    public Account(){
+
+    }
+
+    public Account(Account account) {
+        this.password = account.login;
+        this.password = account.password;
+    }
     public String getLogin() {
         return login;
     }
@@ -30,14 +37,6 @@ public class Account implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     @Override

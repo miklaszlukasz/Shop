@@ -1,7 +1,7 @@
 package pl.miklaszlukasz.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.miklaszlukasz.model.Order;
+import pl.miklaszlukasz.entities.Order;
 
 import java.util.List;
 

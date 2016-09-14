@@ -1,4 +1,4 @@
-package pl.miklaszlukasz.model;
+package pl.miklaszlukasz.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.miklaszlukasz.model.Product;
+import pl.miklaszlukasz.entities.Product;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,7 +26,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     void delete(Product product);
 
     @Modifying
-    @Query(value = "UPDATE Product p set p.name=:name, p.price =:price, p.description=:description WHERE p.id =:id")
+    @Query(value = "UPDATE Product p set p.name=:name, p.price =:price, p.description =:description WHERE p.id =:id")
     void updateById(@Param("id") Long id,
                     @Param("name") String name,
                     @Param("price") BigDecimal price,

@@ -2,7 +2,7 @@ package pl.miklaszlukasz.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.miklaszlukasz.model.BoughtProduct;
+import pl.miklaszlukasz.entities.BoughtProduct;
 
 /**
  * Created by rogonion on 08.09.16.

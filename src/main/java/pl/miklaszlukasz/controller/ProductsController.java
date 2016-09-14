@@ -1,30 +1,25 @@
 package pl.miklaszlukasz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import pl.miklaszlukasz.model.Product;
+import pl.miklaszlukasz.entities.Product;
 import pl.miklaszlukasz.service.ProductService;
 
-import javax.annotation.PostConstruct;
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by rogonion on 07.09.16.
  */
-@RestController
+@Controller
 public class ProductsController {
 
     private ProductService productService;
 
     @Autowired
-    public ProductsController(ProductService productService) {
+    public void setProductService(ProductService productService) {
         this.productService = productService;
     }
 
@@ -45,8 +40,9 @@ public class ProductsController {
 //    }
 
     @RequestMapping(value = "/products", method = RequestMethod.GET)
-    public List<Product> getProductList() {
+    public List<Product> getProductList(@ModelAttribute("model") ModelMap model) {
         List<Product> products = productService.getAllProducts();
+        model.addAttribute("products", products);
         return products;
     }
 
@@ -55,5 +51,16 @@ public class ProductsController {
         Product product = productService.getProduct(id);
         model.addAttribute("product", product);
         return "product";
+    }
+
+    @RequestMapping(value = "/createNewProduct", method = RequestMethod.GET)
+    public String newProduct() {
+        return "createNewProduct";
+    }
+
+    @RequestMapping(value = "/createNewProduct", method = RequestMethod.POST)
+    public String createNewProduct(@ModelAttribute("product") Product product) {
+        productService.createNewProduct(product);
+        return "redirect:/createNewProduct";
     }
 }

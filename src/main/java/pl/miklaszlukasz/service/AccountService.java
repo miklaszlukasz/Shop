@@ -1,30 +1,44 @@
 package pl.miklaszlukasz.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.miklaszlukasz.model.Account;
+import pl.miklaszlukasz.entities.Account;
 import pl.miklaszlukasz.repository.AccountRepository;
+import pl.miklaszlukasz.repository.AccountRoleRepository;
+
+import java.util.List;
 
 /**
- * Created by rogonion on 08.09.16.
+ * Created by rogonion on 13.09.16.
  */
 @Service
-public class AccountService {
+@ComponentScan
+public class AccountService implements UserDetailsService {
+
     private AccountRepository accountRepository;
+    private AccountRoleRepository accountRoleRepository;
 
     @Autowired
-    public AccountService(AccountRepository accountRepository) {
+    public void setAccountRepository(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
-    public void login(String login, String password) {
-        Account account = accountRepository.findByLoginAndPassword(login, password);
-        account.setActive(true);
+    @Autowired
+    private void setAccountRoleRepository(AccountRoleRepository accountRoleRepository) {
+        this.accountRoleRepository = accountRoleRepository;
     }
 
-    public void logout(Account account) {
-        account.setActive(false);
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Account account = accountRepository.findByLogin(username);
+        if (account == null)
+            throw new UsernameNotFoundException("No account in database with login " + username);
+        List<String> userRoles=accountRoleRepository.findAccountRoleByUserName(username);
+        return new pl.miklaszlukasz.service.AccountDetails(account,userRoles);
     }
-
-
 }
