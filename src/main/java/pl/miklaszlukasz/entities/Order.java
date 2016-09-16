@@ -3,6 +3,7 @@ package pl.miklaszlukasz.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,6 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "Orders")
 public class Order implements Serializable {
 
     @Id
@@ -19,15 +19,17 @@ public class Order implements Serializable {
     private long id;
     private Date orderDate;
     @OneToMany(mappedBy = "order")
-    private List<BoughtProduct> boughtProducts;
+    private List<OrderItem> orderItems;
     private BigDecimal price;
 
-    private String customerName;
-    private String customerAddress;
-    private String customerEmail;
-    private String customerPhone;
+//    private String customerName;
+//    private String customerAddress;
+//    private String customerEmail;
+//    private String customerPhone;
 
-    public Order() {}
+    public Order() {
+        orderItems = new ArrayList<>();
+    }
 
     public long getId() {
         return id;
@@ -45,12 +47,12 @@ public class Order implements Serializable {
         this.orderDate = orderDate;
     }
 
-    public List<BoughtProduct> getBoughtProducts() {
-        return boughtProducts;
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
-    public void setBoughtProducts(List<BoughtProduct> boughtProducts) {
-        this.boughtProducts = boughtProducts;
+    public void addOrderItems(OrderItem orderItems) {
+        this.orderItems.add(orderItems);
     }
 
     public BigDecimal getPrice() {
@@ -61,35 +63,35 @@ public class Order implements Serializable {
         this.price = price;
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getCustomerAddress() {
-        return customerAddress;
-    }
-
-    public void setCustomerAddress(String customerAddress) {
-        this.customerAddress = customerAddress;
-    }
-
-    public String getCustomerEmail() {
-        return customerEmail;
-    }
-
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
-    }
-
-    public String getCustomerPhone() {
-        return customerPhone;
-    }
-
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
-    }
+//    public String getCustomerName() {
+//        return customerName;
+//    }
+//
+//    public void setCustomerName(String customerName) {
+//        this.customerName = customerName;
+//    }
+//
+//    public String getCustomerAddress() {
+//        return customerAddress;
+//    }
+//
+//    public void setCustomerAddress(String customerAddress) {
+//        this.customerAddress = customerAddress;
+//    }
+//
+//    public String getCustomerEmail() {
+//        return customerEmail;
+//    }
+//
+//    public void setCustomerEmail(String customerEmail) {
+//        this.customerEmail = customerEmail;
+//    }
+//
+//    public String getCustomerPhone() {
+//        return customerPhone;
+//    }
+//
+//    public void setCustomerPhone(String customerPhone) {
+//        this.customerPhone = customerPhone;
+//    }
 }

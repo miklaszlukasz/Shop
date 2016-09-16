@@ -3,19 +3,19 @@ package pl.miklaszlukasz.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import pl.miklaszlukasz.repository.BoughtProductRepository;
+import pl.miklaszlukasz.repository.OrderItemRepository;
 
 /**
  * Created by rogonion on 12.09.16.
  */
 @Service
 @SessionAttributes("cart")
-public class BoughtProductService {
+public class OrderItemService {
 
-    BoughtProductRepository boughtProductRepository;
+    OrderItemRepository orderItemRepository;
 
     @Autowired
-    public void setBoughtProductRepository(BoughtProductRepository boughtProductRepository) {
-        this.boughtProductRepository = boughtProductRepository;
+    public void setOrderItemRepository(OrderItemRepository orderItemRepository) {
+        this.orderItemRepository = orderItemRepository;
     }
 }

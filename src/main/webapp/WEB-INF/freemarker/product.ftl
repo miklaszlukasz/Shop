@@ -8,13 +8,12 @@
 <#include "header.ftl" />
 <#include "menu.ftl" />
 <div class="container">
-    ${product.id} <br/>
-    ${product.name} <br/>
-    ${product.price} <br/>
-    ${product.description} <br/>
-        <form name="product" th:action="product_${product.id}" method="post">
-            <input type="" name="name" />
-            Amount: <input type="text" id="amount" name="amount" value="1" /><br/>
+    Id: ${product.id} <br/>
+    Name: ${product.name} <br/>
+    Price: ${product.description} <br/>
+    Description: ${product.id} <br/>
+        <form name="int" th:action="/product_${product.id}" method="post" >
+            Amount: <input name="amount" value="1" /><br/>
             <input type="submit" value="Add to cart" />
         </form>
 </div>

@@ -8,8 +8,7 @@ import java.math.BigDecimal;
  * Created by rogonion on 08.09.16.
  */
 @Entity
-@Table(name = "BoughtProduct")
-public class BoughtProduct implements Serializable {
+public class OrderItem implements Serializable {
 
     @Id
     @GeneratedValue
@@ -22,10 +21,6 @@ public class BoughtProduct implements Serializable {
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
     private int amount;
-    private BigDecimal price;
-
-    public BoughtProduct() {
-    }
 
     public long getId() {
         return id;
@@ -57,13 +52,5 @@ public class BoughtProduct implements Serializable {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 }

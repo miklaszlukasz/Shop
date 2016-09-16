@@ -8,7 +8,7 @@
 <#include "header.ftl" />
 <#include "menu.ftl" />
 <div class="container">
-    <table class="products">
+    <table class="products" style="border-collapse: collapse">
         <tr>
             <th>Id</th>
             <th>Name</th>

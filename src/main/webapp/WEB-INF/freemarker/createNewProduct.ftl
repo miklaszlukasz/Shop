@@ -10,7 +10,7 @@
 <div class="container">
     add new product
     <fieldset>
-        <legend>Add User</legend>
+        <legend>Create new product</legend>
         <form name="user" action="createNewProduct.ftl" method="post">
             Name: <input type="text" name="name" /> <br/>
             Price: <input type="text" name="price" /> <br/>

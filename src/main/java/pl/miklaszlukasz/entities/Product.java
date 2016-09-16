@@ -9,7 +9,6 @@ import java.math.BigDecimal;
  */
 
 @Entity
-@Table(name = "Products")
 public class Product implements Serializable {
 
     @Id
@@ -18,9 +17,6 @@ public class Product implements Serializable {
     private String name;
     private BigDecimal price;
     private String description;
-
-    public Product() {
-    }
 
     public long getId() {
         return id;
@@ -52,5 +48,28 @@ public class Product implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+
+        if (id != product.id) return false;
+        if (name != null ? !name.equals(product.name) : product.name != null) return false;
+        if (price != null ? !price.equals(product.price) : product.price != null) return false;
+        return description != null ? description.equals(product.description) : product.description == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        return result;
     }
 }
